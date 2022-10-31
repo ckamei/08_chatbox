@@ -1,0 +1,405 @@
+[v-cloak] {
+  display: none;
+}
+
+#app {
+  max-width: 730px;
+  margin: auto;
+  min-height: calc(100vh - -20px);
+}
+
+h1 {
+  text-align: center;
+}
+
+.person {
+  background: url("images/monster01.png") 0 0 / cover no-repeat;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+}
+
+.person::before {
+  bottom: -20px;
+  content: "大竹";
+  font-size: 12px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  text-align: center;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.chatText {
+  background: #fff;
+  border: 2px solid #3096d4;
+  font-size: 18px;
+  line-height: 1.3;
+  margin: 30px 0 0 110px;
+  padding: 12px 15px;
+  position: relative;
+  border-radius: 20px;
+}
+
+.chatText_2 {
+  margin-top: 10px;
+}
+
+.chatText_3 {
+  margin-top: 40px;
+}
+
+.chatMessage-Advisor {
+  min-width: 670px;
+}
+
+.chatMessage-User{
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+
+.chatMessage-Advisor,
+.chatMessage-User {
+  display: flex;
+  position: relative;
+}
+
+
+.chatMessage-Advisor .chatText::before {
+  background-image: none;
+  border: 7px solid transparent;
+  border-right: 14px solid #fff;
+  content: "";
+  height: 0;
+  left: -13px;
+  margin-top: -14px;
+  position: absolute;
+  top: 14px;
+  transform: rotate(32deg);
+  width: 0;
+  z-index: 1;
+}
+
+.chatMessage-Advisor .chatText::after {
+  border: 7px solid transparent;
+  border-right: 15px solid #3096d4;
+  content: "";
+  left: -18px;
+  margin-top: -15px;
+  position: absolute;
+  top: 12px;
+  transform: rotate(32deg);
+}
+
+.chatMessage-User .chatText {
+  background-color: #069a98;
+  border: 2px solid #069a98;
+  border-radius: 22px;
+  margin: 10px 0 0 auto;
+  color: #fff;
+}
+
+.chatMessage-User .chatText::after {
+  background-image: none;
+  border: 7px solid transparent;
+  border-left: 15px solid #069a98;
+  content: "";
+  height: 0;
+  margin-top: -8px;
+  position: absolute;
+  right: -16px;
+  top: 7%;
+  transform: rotate(-37deg);
+  width: 0;
+}
+
+.chatText__already-read {
+  bottom: 0px;
+  font-size: 14px;
+  font-weight: 100;
+  position: absolute;
+  right: 104%;
+  width: 30px;
+  color: #222;
+}
+
+.image-price {
+  margin: 50px auto 10px;
+  width: 350px;
+  height: 280px;
+  visibility: visible;
+}
+
+.image-price-graph {
+  display: flex;
+  height: 280px;
+}
+
+.image-best-price {
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+  justify-content: center;
+  align-content: flex-end;
+}
+
+
+.image-cheap-price {
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+  align-content: flex-end;
+  justify-content: center;
+}
+
+.chatMessage-Question {
+  font-family: "Yu Gothic", "YuGothic", "Hiragino Kaku Gothic Pro", "メイリオ", "Meiryo", "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  margin: 40px auto 0;
+  max-width: 670px;
+  position: relative;
+  background-color: rgba(107, 203, 228, 0.5);
+  width: 95%;
+  display: flex;
+  justify-content: space-around;
+  font-weight: bold;
+}
+
+.Question-inner {
+  align-items: center;
+  background-color: #fff;
+  border: 2px solid #007b80;
+  border-radius: 8px;
+  box-shadow: 0 4px 0 #0dbdbb;
+  color: #000;
+  height: 130px;
+  justify-content: center;
+  padding: 28px 35px;
+  width: 240px;
+  margin: 20px 15px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.chatMessage-Question02 {
+  background-color: #fff;
+  max-width: 520px;
+}
+
+.chatMessage-Question03 {
+  background-color: #fff;
+  max-width: 540px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.chatMessage-Question03 .Question-inner02 {
+  width: 120px;
+  height: 80px;
+  margin: 5px;
+  display: grid;
+  place-items: center;
+}
+
+.q-note {
+  display: grid;
+  place-items: center;
+}
+
+
+
+.Question-inner02 {
+  width: 150px;
+  height: 150px;
+  align-items: center;
+  background: #fff;
+  border: 2px solid #7d7d7d;
+  border-radius: 10px;
+  box-shadow: 3px 3px 0 #4abdbb;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.Question-inner02 span {
+  font-weight: 600;
+}
+
+.Question-inner02 img {
+  width: 70px;
+}
+
+.Question-inner02 .QuestionText-title {
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+
+
+.Question-inner:hover, .Question-inner02:hover {
+  background-color: #0dbdbb;
+  border: 2px solid #818181;
+  color: #fff;
+}
+
+.QuestionText-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.QuestionText {
+  font-size: 1.1rem;
+  line-height: 1.9rem;
+}
+
+.QuestionText_3 {
+  line-height: 5.9rem;
+}
+
+.QuestionText_4 {
+  line-height: 4.9rem;
+}
+
+.textDisplay {
+  display: none;
+}
+
+.bath-size img{
+  width: 87px;
+}
+
+.q1-contents {
+  margin-top: 30px;
+}
+
+.Question-inner02 input{
+display: none;
+}
+
+label {
+  display: contents;
+}
+
+.contents-scroll{
+  min-height: calc(100vh);
+}
+
+
+
+
+/*-------------------------
+  loading animation
+-------------------------*/
+
+.loading-none {
+  display: none;
+}
+
+.loading {
+  width: 70px;
+  height: 20px;
+  margin-left: 21px;
+  margin-right: 12px;
+  padding-top: 2px;
+}
+
+.loading .load-item {
+  display: inline-block;
+  margin: 2px;
+  width: 12px;
+  height: 12px;
+  animation: loading 0.7s linear infinite;
+  opacity: 0.3;
+  border-radius: 50%;
+}
+
+.loading .load-item:nth-child(1) {
+  background: #03A9F4;
+}
+
+.loading .load-item:nth-child(2) {
+  animation-delay: 0.2s;
+  background: #E91E63;
+}
+
+.loading .load-item:nth-child(3) {
+  animation-delay: 0.4s;
+  background: #673AB7;
+}
+
+
+@keyframes loading {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+  }
+}
+
+
+
+/*-------------------------
+  image animation
+-------------------------*/
+
+
+.image:nth-child(1) {
+  height: 85px;
+  margin: auto;
+}
+
+.image:nth-child(2) {
+  height: 190px;
+}
+
+.image02:nth-child(1) {
+  height: 85px;
+  margin: auto;
+  justify-content: center;
+}
+
+.image02:nth-child(2) {
+  height: 100px;
+}
+
+
+.fadeIn {
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+    transition-duration: .1s;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+    transition-duration: .1s;
+  }
+}
+
+.fadeIcon {
+  animation: fadeIcon 0.4s;
+}
+
+@keyframes fadeIcon {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
