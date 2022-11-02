@@ -29,7 +29,7 @@ let app = new Vue({
     zakQ1ChatArea06: false,
 
     status: 0,
-    //ざっくり質問１
+    //質問１
     zakkuriQ1A1: false,
     zakkuriQ1A2: false,
     zakkuriQ1A3: false,
@@ -47,6 +47,12 @@ let app = new Vue({
 
     //-------未着手-------------//
     //shikkari
+    skrLoading06: true,
+    skrLoading07: true,
+    skrLoading08: true,
+    skrLoading09: true,
+
+
     isText06: false,
     isText07: false,
     isText08: false,
@@ -62,7 +68,7 @@ let app = new Vue({
     visible01: false,
     visibleIcon02: false,
     visible02: false,
-    sec: 0,
+    sec: 300,
     isRead02: false,
     products: [
       { "id": 1, "text": "ユニットバス", "image": "images/unitbath.png", "answer": "ユニットバスです"},
@@ -109,7 +115,7 @@ let app = new Vue({
       });
     },
 
-    //ざっくり計算
+    //--------------ざっくり計算----------------------------
     calcZakkuri: function () {
       let self = this;
       setTimeout(function () {
@@ -157,6 +163,108 @@ let app = new Vue({
             self.zakShowChat06();
           }, self.sec);
         }, self.sec);
+        resolve();
+      });
+    },
+
+
+
+    //--------------しっかり計算----------------------------
+    calcShikkari: function () {
+      let self = this;
+      setTimeout(function () {
+        (self.shikkari = true), self.showChat06();
+      }, self.sec);
+    },
+
+    showChat06: function () {
+      return new Promise((resolve) => {
+        let self = this;
+        self.isQuestion = false;
+        self.isRead = false;
+        self.shikkari = true;
+        setTimeout(function () {
+          (self.skrLoading06 = false), (self.isText06 = true);
+          setTimeout(function () {
+            self.showChat07();
+          }, self.sec);
+        }, self.sec);
+      });
+    },
+
+    showChat07: function () {
+      return new Promise((resolve) => {
+        let self = this;
+        self.isChat04 = true;
+        self.isRead02 = true;
+        setTimeout(function () {
+          (self.skrLoading07 = false), (self.isText07 = true);
+          setTimeout(function () {
+            self.showChat08();
+          }, self.sec);
+          resolve();
+        }, self.sec);
+      });
+    },
+
+    showChat08: function () {
+      return new Promise((resolve) => {
+        let self = this;
+        self.isChat05 = true;
+        setTimeout(function () {
+          (self.skrLoading08 = false), (self.isText08 = true);
+          resolve();
+        }, self.sec);
+      });
+    },
+
+    showImage: function () {
+      if (this.isText08 === true && this.skrLoading08 === false) {
+        return new Promise((resolve) => {
+          let self = this;
+          self.imagePlace = true;
+          setTimeout(function () {
+            self.visible01 = true;
+            setTimeout(function () {
+              (self.visibleIcon01 = true), self.showImage02();
+            }, self.sec);
+          }, self.sec);
+        });
+      }
+    },
+
+    showImage02: function () {
+      return new Promise((resolve) => {
+        let self = this;
+        setTimeout(function () {
+          self.visible02 = true;
+          setTimeout(function () {
+            self.visibleIcon02 = true;
+            self.asyncChat();
+          }, self.sec);
+        }, self.sec);
+      });
+    },
+
+    asyncChat: async function () {
+      await this.asyncFunc(this.showImage02());
+      await this.asyncFunc(this.showChat09());
+    },
+
+    showChat09: function () {
+      return new Promise((resolve) => {
+        let self = this;
+        if (self.visibleIcon02 = true) {
+          setTimeout(function () {
+            self.isChat06 = true;
+            setTimeout(function () {
+              (self.skrLoading09 = false), (self.isText09 = true);
+              setTimeout(function () {
+                self.zakShowChat06();
+              }, self.sec);
+            }, self.sec);
+          }, self.sec);
+        }
         resolve();
       });
     },
@@ -237,100 +345,8 @@ let app = new Vue({
     //-------------end---Question1:希望されるお風呂は、どのような形式ですか？-----------//
 
 
-    //しっかり計算(消さないこと！！！！！！！)
-    calcShikkari: function () {
-      let self = this;
-      setTimeout(function () {
-        (self.shikkari = true), self.showChat06();
-      }, self.sec);
-    },
 
-    // showChat06: function () {
-    //   return new Promise((resolve) => {
-    //     let self = this;
-    //     self.isQuestion = false;
-    //     self.isRead = false;
-    //     self.shikkari = true;
-    //     setTimeout(function () {
-    //       (self.iszakLoading06 = false), (self.isText06 = true);
-    //       setTimeout(function () {
-    //         self.showChat07();
-    //       }, self.sec);
-    //     }, self.sec);
-    //   });
-    // },
-
-    // showChat07: function () {
-    //   return new Promise((resolve) => {
-    //     let self = this;
-    //     self.isChat04 = true;
-    //     self.isRead02 = true;
-    //     setTimeout(function () {
-    //       (self.isLoading07 = false), (self.isText07 = true);
-    //       setTimeout(function () {
-    //         self.showChat08();
-    //       }, self.sec);
-    //       resolve();
-    //     }, self.sec);
-    //   });
-    // },
-
-    // showChat08: function () {
-    //   return new Promise((resolve) => {
-    //     let self = this;
-    //     self.isChat05 = true;
-    //     setTimeout(function () {
-    //       (self.isLoading08 = false), (self.isText08 = true);
-    //       resolve();
-    //     }, self.sec);
-    //   });
-    // },
-
-    // showImage: function () {
-    //   if (this.isText08 === true && this.isLoading08 === false) {
-    //     return new Promise((resolve) => {
-    //       let self = this;
-    //       self.imagePlace = true;
-    //       setTimeout(function () {
-    //         self.visible01 = true;
-    //         setTimeout(function () {
-    //           (self.visibleIcon01 = true), self.showImage02();
-    //         }, self.sec);
-    //       }, self.sec);
-    //     });
-    //   }
-    // },
-
-    // showImage02: function () {
-    //   return new Promise((resolve) => {
-    //     let self = this;
-    //     setTimeout(function () {
-    //       self.visible02 = true;
-    //       setTimeout(function () {
-    //         self.visibleIcon02 = true;
-    //         self.asyncChat();
-    //       }, self.sec);
-    //     }, self.sec);
-    //   });
-    // },
-
-    // asyncChat: async function () {
-    //   await this.asyncFunc(this.showImage02());
-    //   await this.asyncFunc(this.showChat09());
-    // },
-
-    // showChat09: function () {
-    //   let self = this;
-    //   if ((self.visibleIcon02 = true)) {
-    //     setTimeout(function () {
-    //       self.isChat06 = true;
-    //       setTimeout(function () {
-    //         (self.isLoading09 = false), (self.isText09 = true);
-    //       }, self.sec);
-    //     }, self.sec);
-    //   }
-    // },
-    //しっかり計算(消さないこと！！！！！！！)
+    
 
     asyncFunc: function () {
       let self = this;

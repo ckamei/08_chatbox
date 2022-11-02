@@ -22,8 +22,8 @@ Vue.component('q10', {
       </label>
     </template>
     <template v-if="areaBox2">
-      <label id="btnBox" class="Question-inner02" v-for="pref in filteredPref">
-          <input type="radio" name="btn"  @click="question($event)">
+      <label id="btnBox" class="Question-inner02" v-for="pref in filteredPref" >
+          <input type="radio" name="btn" :value="pref.id" v-model="selectedPrefId">
           <span class="QuestionText QuestionText_4" v-html='pref.name'></span>
       </label>
     </template>
@@ -38,7 +38,7 @@ Vue.component('q10', {
                 <div class="load-item"></div>
                 <div class="load-item"></div>
             </div>
-                <div v-for="answers in question">{{ answers.answer }}</div>
+                <div v-for="answers in filteredAnswer">{{ answers.answer }}</div>
             <div class="chatText__already-read" v-show="zakReadq10">既読</div>
         </div>
     </div>
@@ -147,13 +147,31 @@ Vue.component('q10', {
       for (let i = 0; i < self.prefs.length; i++) {
         let pref = self.prefs[i];
         if (pref.prefId === self.selectedAreaId) {
-          self.areaBox = false;
-          filteredPref.push(pref);
+            self.areaBox = false;
+            filteredPref.push(pref);
         }
       }
       return filteredPref;
     },
-    
+    filteredAnswer: function () {
+      let newObject = [];
+      let newAnswer = [];
+      for (let i = 0; i < this.filteredPref.length; i++) {
+        newObject.push(this.filteredPref[i])
+        if (newObject[i].id === this.selectedPrefId) {
+          let self = this;
+          setTimeout(() => {
+            self.chatBox = true,
+              self.status = 0;
+            setTimeout(() => {
+              self.zakLoading3 = false;
+              newAnswer.push(newObject[i])
+            },self.sec)
+          },self.sec)
+        }
+      }
+      return newAnswer;
+    },
   },
   methods: {
     zakShowchatQ1: function () {
@@ -168,28 +186,6 @@ Vue.component('q10', {
         }, self.sec);
       }, self.sec);
     },
-
-    question: function (e) {
-      for (let i = 0; i < this.prefs.length; i++) {
-        this.chatBox = true,
-          this.status = 0;
-      }
-      let filteredAnswer = [];
-      let newArray = [];
-      for (let i = 0; i < this.filteredPref.length; i++) {
-        let answer = this.filteredPref[i];
-        filteredAnswer.push(answer);
-      }
-      let id = e.currentTarget.getAttribute('data-id')
-      console.log(event.target.dataset.id)
-      let array = filteredAnswer[this.selectedPrefId];
-      return array;
-
-    },
-    // filteredAnswer: function () {
-      
-
-    // }
 
   },
 })

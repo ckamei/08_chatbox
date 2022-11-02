@@ -84,6 +84,75 @@
                         <div v-show="chatText05"> データをもとに、あなたの相場をざっくり計算します。</div>
                     </div>
                 </div>
+            </div>
+
+
+            <!-- しっかり計算 -->
+                <div class="shikkari" v-show="shikkari">
+                    <div class="chatMessage-User">
+                        <div class="person hidden">
+                        </div>
+                        <div class="chatText">
+                            <div class="loading" v-show="skrLoading06">
+                                <div class="load-item"></div>
+                                <div class="load-item"></div>
+                                <div class="load-item"></div>
+                            </div>
+                            <div v-show="isText06"> しっかり計算です</div>
+                            <div class="chatText__already-read" v-show="isRead02">既読</div>
+                        </div>
+                    </div>
+                    <div class="chatMessage-Advisor" v-show="isChat04">
+                        <div class="person"></div>
+                        <div class="chatText">
+                            <div class="loading" v-show="skrLoading07">
+                                <div class="load-item"></div>
+                                <div class="load-item"></div>
+                                <div class="load-item"></div>
+                            </div>
+                            <div v-show="isText07"> かしこまりました。</div>
+                        </div>
+                    </div>
+                    <div class="chatMessage-Advisor" v-show="isChat05">
+                        <div class="person hidden">
+                        </div>
+                        <div class="chatText chatText_2">
+                            <div class="loading" v-show="skrLoading08">
+                                <div class="load-item"></div>
+                                <div class="load-item"></div>
+                                <div class="load-item"></div>
+                            </div>
+                            <div v-show="isText08"> マンション・アパートのお風呂リフォーム相場は</div>
+                        </div>
+                    </div>
+                    <div class="image-price" v-bind="showImage()">
+                        <div class="image-price-graph">
+                            <div class="image-best-price">
+                                <img src="images/image-best-icon.png" class="image-best-icon image" :class="{fadeIcon:visible01}" v-show="visibleIcon01"></img>
+                                <img src="images/image-best-img.png" class="image-best-img image" :class="{fadeIn:visible01}" v-show="visible01"></img>
+                            </div>
+                            <div class="image-cheap-price">
+                                <img src="images/image-cheap-icon.png" class="image-cheap-icon image02" :class="{fadeIcon:visible02}" v-show="visibleIcon02"></img>
+                                <img src="images/image-cheap-img.png" class="image-cheap-img image02" :class="{fadeIn:visible02}" v-show="visible02"></img>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chatMessage-Advisor" v-show="isChat06">
+                        <div class="person">
+                        </div>
+                        <div class="chatText">
+                            <div class="loading" v-show="skrLoading09">
+                                <div class="load-item"></div>
+                                <div class="load-item"></div>
+                                <div class="load-item"></div>
+                            </div>
+                            <div v-show="isText09"> あなたの費用を、データをもとにしっかり計算します。</div>
+                        </div>
+                    </div>
+                </div>
+            
+                
+                
                 <!-- 希望されるお風呂は、どのような形式ですか？ -->
                 <div class="q1-contents">
                     <div class="chatMessage-Advisor" v-show="zakQ1ChatArea06">
@@ -124,77 +193,12 @@
                 </div>
                 <!-- 希望されるお風呂の大きさは、どのくらいですか？ -->
                 <q2 ref="child" @change="changeZakReadq1" :sec="sec"></q2>
-
-            </div>
-
+            
 
 
 
-
-            <!-- しっかり計算 -->
-            <div class="shikkari" v-if="shikkari">
-                <div class="chatMessage-User">
-                    <div class="person hidden">
-                    </div>
-                    <div class="chatText">
-                        <div class="loading" v-show="isLoading06">
-                            <div class="load-item"></div>
-                            <div class="load-item"></div>
-                            <div class="load-item"></div>
-                        </div>
-                        <div v-show="isText06"> しっかり計算です</div>
-                        <div class="chatText__already-read" v-show="isRead02">既読</div>
-                    </div>
-                </div>
-                <div class="chatMessage-Advisor" v-show="isChat04">
-                    <div class="person"></div>
-                    <div class="chatText">
-                        <div class="loading" v-show="isLoading07">
-                            <div class="load-item"></div>
-                            <div class="load-item"></div>
-                            <div class="load-item"></div>
-                        </div>
-                        <div v-show="isText07"> かしこまりました。</div>
-                    </div>
-                </div>
-                <div class="chatMessage-Advisor" v-show="isChat05">
-                    <div class="person hidden">
-                    </div>
-                    <div class="chatText chatText_2">
-                        <div class="loading" v-show="isLoading08">
-                            <div class="load-item"></div>
-                            <div class="load-item"></div>
-                            <div class="load-item"></div>
-                        </div>
-                        <div v-show="isText08"> マンション・アパートのお風呂リフォーム相場は</div>
-                    </div>
-                </div>
-                <div class="image-price" v-bind="showImage()">
-                    <div class="image-price-graph">
-                        <div class="image-best-price">
-                            <img src="images/image-best-icon.png" class="image-best-icon image" :class="{fadeIcon:visible01}" v-show="visibleIcon01"></img>
-                            <img src="images/image-best-img.png" class="image-best-img image" :class="{fadeIn:visible01}" v-show="visible01"></img>
-                        </div>
-                        <div class="image-cheap-price">
-                            <img src="images/image-cheap-icon.png" class="image-cheap-icon image02" :class="{fadeIcon:visible02}" v-show="visibleIcon02"></img>
-                            <img src="images/image-cheap-img.png" class="image-cheap-img image02" :class="{fadeIn:visible02}" v-show="visible02"></img>
-                        </div>
-                    </div>
-                </div>
-                <div class="chatMessage-Advisor" v-show="isChat06">
-                    <div class="person">
-                    </div>
-                    <div class="chatText">
-                        <div class="loading" v-show="isLoading09">
-                            <div class="load-item"></div>
-                            <div class="load-item"></div>
-                            <div class="load-item"></div>
-                        </div>
-                        <div v-show="isText09"> あなたの費用を、データをもとにしっかり計算します。</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            
+            
         </div>
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
         <script src="q10.js"></script>

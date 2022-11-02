@@ -94,6 +94,7 @@ Vue.component('q2', {
         if (btn.item(i).checked) {
           checkValue = btn.item(i).value;
         }
+        console.log(btn);//ざっくりだと３つ要素が出てくるが、しっかりだと６つ出てくる。ここで既に違う
       }
       if (checkValue === "1") {
         setTimeout(() => {
