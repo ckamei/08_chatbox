@@ -22,8 +22,8 @@ Vue.component('q10', {
       </label>
     </template>
     <template v-if="areaBox2">
-      <label id="btnBox" class="Question-inner02" v-for="pref in filteredPref" v-on:click="question()">
-          <input type="radio" name="btn" :value="pref.id" v-model="selectedPrefId">
+      <label id="btnBox" class="Question-inner02" v-for="pref in filteredPref">
+          <input type="radio" name="btn"  @click="question($event)">
           <span class="QuestionText QuestionText_4" v-html='pref.name'></span>
       </label>
     </template>
@@ -38,7 +38,7 @@ Vue.component('q10', {
                 <div class="load-item"></div>
                 <div class="load-item"></div>
             </div>
-                <div v-for="answers in filteredAnswer">{{ answers.answer }}</div>
+                <div v-for="answers in question">{{ answers.answer }}</div>
             <div class="chatText__already-read" v-show="zakReadq10">既読</div>
         </div>
     </div>
@@ -153,21 +153,7 @@ Vue.component('q10', {
       }
       return filteredPref;
     },
-    filteredAnswer: function () {
-      let filteredAnswer = [];
-      let newArray = [];
-      for (let i = 0; i < this.filteredPref.length; i++) {
-        let answer = this.filteredPref[i];
-        filteredAnswer.push(answer);
-      }
-      for (let j = 0; j < filteredAnswer.length; j++) {
-        let array = filteredAnswer[j];
-        //if(array.id === this.)
-        console.log(this.selectedPrefId)
-        //newArray.push(array);
-      }
-      return filteredAnswer;
-    }
+    
   },
   methods: {
     zakShowchatQ1: function () {
@@ -183,13 +169,27 @@ Vue.component('q10', {
       }, self.sec);
     },
 
-    question: function () {
+    question: function (e) {
       for (let i = 0; i < this.prefs.length; i++) {
         this.chatBox = true,
           this.status = 0;
       }
+      let filteredAnswer = [];
+      let newArray = [];
+      for (let i = 0; i < this.filteredPref.length; i++) {
+        let answer = this.filteredPref[i];
+        filteredAnswer.push(answer);
+      }
+      let id = e.currentTarget.getAttribute('data-id')
+      console.log(event.target.dataset.id)
+      let array = filteredAnswer[this.selectedPrefId];
+      return array;
 
-    }
+    },
+    // filteredAnswer: function () {
+      
+
+    // }
 
   },
 })
