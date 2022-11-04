@@ -1,6 +1,6 @@
 Vue.component('q5', {
   template: `
-  <div class="q5-contents contents-scroll">
+  <div class="q5-contents ">
       <div class="chatMessage-Advisor" v-show="zakQ1ChatArea">
           <div class="person">
           </div>
@@ -14,11 +14,11 @@ Vue.component('q5', {
           </div>
       </div>
       <div class="chatMessage-Question chatMessage-Question02" v-if="status === 5">
-        <label id="btnBox" class="Question-inner02" v-on:click="question()" v-for="product in products" v-bind:key="product.id">
-            <input type="radio" name="btn" :value="product.id">
+        <div for="btnBox" class="Question-inner02" v-on:click="question(index)" v-for="(product, index) in products" v-bind:key="product.id">
+            <input  id="btnBox" type="radio"  :value="product.id">
             <img  class="QuestionText-title img-note" v-bind:src="product.image">
             <span class="QuestionText QuestionText_3" v-html='product.text'></span>
-        </label>
+        </div>
       </div>
     <!---リラックス・マッサージ効果のある、バブルバス・ジェットバスをご希望されますか？ANSWER -->
     <div class="chatMessage-User" v-show="chatBox">
@@ -85,17 +85,10 @@ Vue.component('q5', {
         }, self.sec);
       }, self.sec);
     },
-    question: function () {
-      let btn = document.getElementsByName('btn');
-      let checkValue = '';
+    question: function (index) {
       let self = this;
       
-      for (let i = 0; i < 3; i++) {
-        if (btn.item(i).checked) {
-          checkValue = btn.item(i).value;
-        }
-      }
-      if (checkValue === "1") {
+      if (index === 0) {
         setTimeout(() => {
           self.chatBox = true,
             self.status = 0,
@@ -108,7 +101,7 @@ Vue.component('q5', {
             }, self.sec);
         },self.sec);
       }
-      else if (checkValue === "2") {
+      else if (index === 1) {
         setTimeout(() => {
           self.chatBox = true,
             self.status = 0,
@@ -121,7 +114,7 @@ Vue.component('q5', {
             }, self.sec);
         },self.sec);
       }
-      else if (checkValue === "3") {
+      else if (index === 2) {
         setTimeout(() => {
           self.chatBox = true,
             self.status = 0,

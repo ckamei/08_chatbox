@@ -1,6 +1,6 @@
 Vue.component('q2', {
   template: `
-  <div class="q2-contents contents-scroll">
+  <div class="q2-contents">
       <div class="chatMessage-Advisor" v-show="zakQ1ChatArea">
           <div class="person">
           </div>
@@ -14,11 +14,11 @@ Vue.component('q2', {
           </div>
       </div>
       <div class="chatMessage-Question chatMessage-Question02" v-if="status === 2">
-        <label id="btnBox" class="Question-inner02" v-on:click="question()" v-for="product in products" v-bind:key="product.id">
-            <input type="radio" name="btn" :value="product.id">
-            <img  class="QuestionText-title img-note" v-bind:src="product.image">
+        <div for="btnBox" class="Question-inner02" v-on:click="question(index)" v-for="(product, index) in products" v-bind:key="product.id">
+            <input id="btnBox" type="radio" :value="product.id">
+            <img  class="QuestionText-title img-note" v-bind:src="product.image" :class="{active:index === 1, active2:index === 0}">
             <span class="QuestionText" v-html='product.text'></span>
-        </label>
+        </div>
       </div>
     <!---希望されるお風呂は、どのような形式ですか？ANSWER -->
     <div class="chatMessage-User" v-show="chatBox">
@@ -52,6 +52,7 @@ Vue.component('q2', {
       answer3: false,
       status: 0,
       zakReadq2: false,
+      active: true,
       products: [
         { "id": 1, "text": "２畳未満", "image": "images/2jo.png","answer": "２畳未満です"},
         { "id": 2, "text": "２畳以上", "image": "images/more2jo.png","answer": "２畳以上です"},
@@ -85,18 +86,9 @@ Vue.component('q2', {
         }, self.sec);
       }, self.sec);
     },
-    question: function () {
-      let btn = document.getElementsByName('btn');
-      let checkValue = '';
+    question: function (index) {
       let self = this;
-      
-      for (let i = 0; i < 3; i++) {
-        if (btn.item(i).checked) {
-          checkValue = btn.item(i).value;
-        }
-        console.log(btn);//ざっくりだと３つ要素が出てくるが、しっかりだと６つ出てくる。ここで既に違う
-      }
-      if (checkValue === "1") {
+      if (index === 0) {
         setTimeout(() => {
           self.chatBox = true,
             self.status = 0,
@@ -109,7 +101,7 @@ Vue.component('q2', {
             }, self.sec);
         },self.sec);
       }
-      else if (checkValue === "2") {
+      else if (index === 1) {
         setTimeout(() => {
           self.chatBox = true,
             self.status = 0,
@@ -122,7 +114,7 @@ Vue.component('q2', {
             }, self.sec);
         },self.sec);
       }
-      else if (checkValue === "3") {
+      else if (index === 2) {
         setTimeout(() => {
           self.chatBox = true,
             self.status = 0,

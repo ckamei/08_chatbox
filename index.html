@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Title</title>
         <meta name="description" content="Title">
-        <link rel="stylesheet" href="q2.css">
         <link rel="stylesheet" href="style.css">
         <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
     </head>
@@ -45,46 +44,9 @@
                     <div class="QuestionText"> 欲しい機能や<br>設備も入れて </div>
                 </div>
             </div>
-            <!-- ざっくり計算 -->
-            <div class="zakkuri contents-scroll" v-if="zakkuri">
-                <div class="chatMessage-User">
-                    <div class="person hidden">
-                    </div>
-                    <div class="chatText">
-                        <div class="loading" v-show="loading03">
-                            <div class="load-item"></div>
-                            <div class="load-item"></div>
-                            <div class="load-item"></div>
-                        </div>
-                        <div v-show="chatText03">ざっくり計算です</div>
-                        <div class="chatText__already-read" v-show="read03">既読</div>
-                    </div>
-                </div>
-                <div class="chatMessage-Advisor" v-show="chatArea04">
-                    <div class="person">
-                    </div>
-                    <div class="chatText">
-                        <div class="loading" v-show="loading04">
-                            <div class="load-item"></div>
-                            <div class="load-item"></div>
-                            <div class="load-item"></div>
-                        </div>
-                        <div v-show="chatText04"> かしこまりました。</div>
-                    </div>
-                </div>
-                <div class="chatMessage-Advisor" v-show="chatArea05">
-                    <div class="person hidden">
-                    </div>
-                    <div class="chatText chatText_2">
-                        <div class="loading" v-show="loading05">
-                            <div class="load-item"></div>
-                            <div class="load-item"></div>
-                            <div class="load-item"></div>
-                        </div>
-                        <div v-show="chatText05"> データをもとに、あなたの相場をざっくり計算します。</div>
-                    </div>
-                </div>
-            </div>
+
+
+            
 
 
             <!-- しっかり計算 -->
@@ -151,54 +113,48 @@
                     </div>
                 </div>
             
-                
-                
-                <!-- 希望されるお風呂は、どのような形式ですか？ -->
-                <div class="q1-contents">
-                    <div class="chatMessage-Advisor" v-show="zakQ1ChatArea06">
-                        <div class="person">
-                        </div>
-                        <div class="chatText">
-                            <div class="loading" v-show="zakLoading06">
-                                <div class="load-item"></div>
-                                <div class="load-item"></div>
-                                <div class="load-item"></div>
-                            </div>
-                            <div v-show="zakChatText06"> 希望されるお風呂は、どのような形式ですか？</div>
-                        </div>
-                    </div>
-                    <div class="chatMessage-Question chatMessage-Question02" v-if="status === 1">
-                        <label id="btnBox" class="Question-inner02" v-on:click="question()" v-for="product in products" v-bind:key="product.id">
-                            <input type="radio" name="btn" :value="product.id">
-                            <img  class="QuestionText-title" v-bind:src="product.image">
-                            <span class="QuestionText" v-html='product.text'></span>
-                        </label>
-                    </div>
-                    <!---希望されるお風呂は、どのような形式ですか？ANSWER -->
-                    <div class="chatMessage-User" v-show="chatBox">
+                <!-- ざっくり計算 -->
+                <div class="zakkuri " v-if="zakkuri">
+                    <div class="chatMessage-User">
                         <div class="person hidden">
                         </div>
                         <div class="chatText">
-                            <div class="loading" v-show="zakLoading07">
+                            <div class="loading" v-show="loading03">
                                 <div class="load-item"></div>
                                 <div class="load-item"></div>
                                 <div class="load-item"></div>
                             </div>
-                                <div v-if='answer1'>{{ products[0].answer }}</div>
-                                <div v-else-if='answer2'>{{ products[1].answer }}</div>
-                                <div v-else-if='answer3'>{{ products[2].answer }}</div>
-                            <div class="chatText__already-read" v-show="zakReadq1">既読</div>
+                            <div v-show="chatText03">ざっくり計算です</div>
+                            <div class="chatText__already-read" v-show="read03">既読</div>
+                        </div>
+                    </div>
+                    <div class="chatMessage-Advisor" v-show="chatArea04">
+                        <div class="person">
+                        </div>
+                        <div class="chatText">
+                            <div class="loading" v-show="loading04">
+                                <div class="load-item"></div>
+                                <div class="load-item"></div>
+                                <div class="load-item"></div>
+                            </div>
+                            <div v-show="chatText04"> かしこまりました。</div>
+                        </div>
+                    </div>
+                    <div class="chatMessage-Advisor" v-show="chatArea05">
+                        <div class="person hidden">
+                        </div>
+                        <div class="chatText chatText_2">
+                            <div class="loading" v-show="loading05">
+                                <div class="load-item"></div>
+                                <div class="load-item"></div>
+                                <div class="load-item"></div>
+                            </div>
+                            <div v-show="chatText05"> データをもとに、あなたの相場をざっくり計算します。</div>
                         </div>
                     </div>
                 </div>
-                <!-- 希望されるお風呂の大きさは、どのくらいですか？ -->
-                <q2 ref="child" @change="changeZakReadq1" :sec="sec"></q2>
-            
-
-
-
-            
-            
+                <q1 ref="child0" :sec="sec"></q1>
+                
         </div>
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
         <script src="q10.js"></script>
@@ -210,6 +166,7 @@
         <script src="q4.js"></script>
         <script src="q3.js"></script>
         <script src="q2.js"></script>
+        <script src="q1.js"></script>
         <script src="main.js"></script>
     </body>
 </html>

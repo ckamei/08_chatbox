@@ -1,6 +1,7 @@
 let app = new Vue({
   el: "#app",
   data: {
+    //最初の質問
     loading01: true,
     loading02: true,
     loading03: true,
@@ -19,49 +20,25 @@ let app = new Vue({
     read03: false,
     zakkuri: false,
 
-    //zakkuriボタンを選んだ後の動き
+    //zakkuri
     zakLoading06: true,
     zakLoading07: true,
     zakLoading11: true,
     zakLoading12: true,
     zakLoading13: true,
-    zakChatText06: false,
-    zakQ1ChatArea06: false,
 
-    status: 0,
-    //質問１
-    zakkuriQ1A1: false,
-    zakkuriQ1A2: false,
-    zakkuriQ1A3: false,
-    zakQ1Ans1: false,
-    zakQ1Ans2: false,
-    zakQ1Ans3: false,
-    zakReadq1: false,
-    chatBox: false,
-    answer1: false,
-    answer2: false,
-    answer3: false,
-
-
-
-
-    //-------未着手-------------//
     //shikkari
     skrLoading06: true,
     skrLoading07: true,
     skrLoading08: true,
     skrLoading09: true,
-
-
     isText06: false,
     isText07: false,
     isText08: false,
     isText09: false,
-
     isChat04: false,
     isChat05: false,
     isChat06: false,
-
     shikkari: false,
     imagePlace: false,
     visibleIcon01: false,
@@ -70,11 +47,6 @@ let app = new Vue({
     visible02: false,
     sec: 300,
     isRead02: false,
-    products: [
-      { "id": 1, "text": "ユニットバス", "image": "images/unitbath.png", "answer": "ユニットバスです"},
-      { "id": 2, "text": "タイル貼り", "image": "images/tile.png","answer": "タイル貼りです"},
-      { "id": 3, "text": "わからない", "image": "images/idk.png","answer": "わからないです"},
-    ],
   },
   created: async function () {
     await this.asyncFunc(this.showChat01());
@@ -83,9 +55,7 @@ let app = new Vue({
     await this.asyncFunc(this.showQuestion());
   },
   methods: {
-    changeZakReadq1: function (newVal) {
-      this.zakReadq1 = newVal;
-    },
+    
     showChat01: function () {
       return new Promise((resolve) => {
         let self = this;
@@ -160,7 +130,7 @@ let app = new Vue({
         setTimeout(function () {
           (self.loading05 = false), (self.chatText05 = true);
           setTimeout(function () {
-            self.zakShowChat06();
+            self.$refs.child0.zakShowChat06();
           }, self.sec);
         }, self.sec);
         resolve();
@@ -224,6 +194,7 @@ let app = new Vue({
           let self = this;
           self.imagePlace = true;
           setTimeout(function () {
+            //scrollBy({top: 200, behavior: 'smooth'});
             self.visible01 = true;
             setTimeout(function () {
               (self.visibleIcon01 = true), self.showImage02();
@@ -251,6 +222,7 @@ let app = new Vue({
       await this.asyncFunc(this.showChat09());
     },
 
+    //データをもとに、あなたの相場をざっくり計算します。
     showChat09: function () {
       return new Promise((resolve) => {
         let self = this;
@@ -260,7 +232,7 @@ let app = new Vue({
             setTimeout(function () {
               (self.skrLoading09 = false), (self.isText09 = true);
               setTimeout(function () {
-                self.zakShowChat06();
+                self.$refs.child0.zakShowChat06();
               }, self.sec);
             }, self.sec);
           }, self.sec);
@@ -269,85 +241,7 @@ let app = new Vue({
       });
     },
 
-    //-------------Question1:希望されるお風呂は、どのような形式ですか？-----------//
-
-    
-    //チャット部分
-    zakShowChat06: function () {
-      return new Promise((resolve) => {
-        let self = this;
-        self.zakQ1ChatArea06 = true;
-        scrollBy({top: 200, behavior: 'smooth'});
-        setTimeout(function () {
-          self.zakLoading06 = false,
-          self.zakChatText06 = true;
-          setTimeout(function () {
-            self.status = 1
-            scrollBy({top: 200, behavior: 'smooth'});
-          },self.sec)
-          resolve();
-        },self.sec)
-      });
-    },
-
-    //button押したら、チャットが表示する関数
-    question: function () {
-      let btn = document.getElementsByName('btn');
-      let checkValue = '';
-      let self = this;
-
-      for (let i = 0; i < 3; i++) {
-        if (btn.item(i).checked) {
-          checkValue = btn.item(i).value;
-        }
-      }
-      
-      if (checkValue === "1") {
-        setTimeout(() => {
-          self.chatBox = true,
-            self.status = 0,
-            setTimeout(() => {
-              self.zakLoading07 = false,
-                self.answer1 = true,
-                setTimeout(() => {
-                  self.$refs.child.zakShowchatQ1();
-                }, self.sec);
-            }, self.sec);
-        },self.sec);
-      }
-      else if (checkValue === "2") {
-        setTimeout(() => {
-          self.chatBox = true,
-            self.status = 0,
-            setTimeout(() => {
-              self.zakLoading07 = false,
-                self.answer2 = true,
-                setTimeout(() => {
-                  self.$refs.child.zakShowchatQ1();
-                }, self.sec);
-            }, self.sec);
-        },self.sec);
-      }
-      else if (checkValue === "3") {
-        setTimeout(() => {
-          self.chatBox = true,
-            self.status = 0,
-            setTimeout(() => {
-              self.zakLoading07 = false,
-                self.answer3 = true,
-                setTimeout(() => {
-                  self.$refs.child.zakShowchatQ1();
-                }, self.sec);
-            }, self.sec);
-        },self.sec);
-      }
-    },
-    //-------------end---Question1:希望されるお風呂は、どのような形式ですか？-----------//
-
-
-
-    
-
+    //時差用の関数
     asyncFunc: function () {
       let self = this;
       return new Promise(function (resolve) {
@@ -357,5 +251,4 @@ let app = new Vue({
       });
     },
   },
-  
 });

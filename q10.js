@@ -1,6 +1,6 @@
 Vue.component('q10', {
   template: `
-  <div class="q10-contents contents-scroll">
+  <div class="q10-contents ">
     <div class="chatMessage-Advisor" v-show="zakQ1ChatArea1">
         <div class="person">
         </div>
@@ -16,13 +16,13 @@ Vue.component('q10', {
 
     <div class="chatMessage-Question chatMessage-Question03" v-if="status === 10">
     <template v-if="areaBox">
-      <label id="btnBox" class="Question-inner02" v-for="area in areas">
-          <input type="radio" name="btn" :value="area.id" v-model="selectedAreaId">
+      <label class="Question-inner02" v-for="area in areas">
+          <input  type="radio" name="btn" :value="area.id" v-model="selectedAreaId">
           <span class="QuestionText QuestionText_4" v-html='area.name'></span>
       </label>
     </template>
     <template v-if="areaBox2">
-      <label id="btnBox" class="Question-inner02" v-for="pref in filteredPref" >
+      <label class="Question-inner02" v-for="pref in filteredPref" >
           <input type="radio" name="btn" :value="pref.id" v-model="selectedPrefId">
           <span class="QuestionText QuestionText_4" v-html='pref.name'></span>
       </label>
