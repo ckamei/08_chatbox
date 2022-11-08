@@ -45,7 +45,7 @@ let app = new Vue({
     visible01: false,
     visibleIcon02: false,
     visible02: false,
-    sec: 300,
+    sec: 500,
     isRead02: false,
   },
   created: async function () {
@@ -55,7 +55,10 @@ let app = new Vue({
     await this.asyncFunc(this.showQuestion());
   },
   methods: {
-    
+    scrollFunc: function () {
+      let app = document.querySelector('#app')
+          app.scrollIntoView(false);
+    },
     showChat01: function () {
       return new Promise((resolve) => {
         let self = this;
@@ -130,7 +133,7 @@ let app = new Vue({
         setTimeout(function () {
           (self.loading05 = false), (self.chatText05 = true);
           setTimeout(function () {
-            self.$refs.child0.zakShowChat06();
+            self.$refs.child0.zakShowchatQ1();
           }, self.sec);
         }, self.sec);
         resolve();
@@ -190,17 +193,15 @@ let app = new Vue({
 
     showImage: function () {
       if (this.isText08 === true && this.skrLoading08 === false) {
-        return new Promise((resolve) => {
-          let self = this;
-          self.imagePlace = true;
+        let self = this;
+        self.imagePlace = true;
+        setTimeout(function () {
+          self.scrollFunc();
+          self.visible01 = true;
           setTimeout(function () {
-            //scrollBy({top: 200, behavior: 'smooth'});
-            self.visible01 = true;
-            setTimeout(function () {
               (self.visibleIcon01 = true), self.showImage02();
             }, self.sec);
           }, self.sec);
-        });
       }
     },
 
@@ -232,7 +233,7 @@ let app = new Vue({
             setTimeout(function () {
               (self.skrLoading09 = false), (self.isText09 = true);
               setTimeout(function () {
-                self.$refs.child0.zakShowChat06();
+                self.$refs.child0.zakShowchatQ1();
               }, self.sec);
             }, self.sec);
           }, self.sec);
@@ -240,6 +241,8 @@ let app = new Vue({
         resolve();
       });
     },
+
+    
 
     //時差用の関数
     asyncFunc: function () {
@@ -250,5 +253,7 @@ let app = new Vue({
         }, self.sec);
       });
     },
+
+    
   },
 });

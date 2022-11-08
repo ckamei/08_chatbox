@@ -3,12 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Title</title>
+        <title>課題08 チャットツール</title>
         <meta name="description" content="Title">
         <link rel="stylesheet" href="style.css">
         <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
     </head>
-    <body>
+    <body id="body">
         <div id="app" v-cloak>
             <div class="chatMessage-Advisor">
                 <div class="person">
@@ -153,9 +153,8 @@
                         </div>
                     </div>
                 </div>
-                <q1 ref="child0" :sec="sec"></q1>
-                
-        </div>
+                <q1 ref="child0" :sec="sec" @child-scroll="scrollFunc"></q1>
+            </div>
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
         <script src="q10.js"></script>
         <script src="q9.js"></script>

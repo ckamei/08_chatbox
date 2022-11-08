@@ -89,6 +89,10 @@ Vue.component('q8', {
     changeZakReadq8: function (newVal8) {
       this.zakReadq8 = newVal8;
     },
+    scrollFunc: function () {
+      let app = document.querySelector('.q8-contents')
+      app.scrollIntoView();
+    },
     zakShowchatQ1: function () {
       let self = this;
       self.zakQ1ChatArea1 = true;
@@ -104,10 +108,10 @@ Vue.component('q8', {
     zakShowchatQ2: function () {
       let self = this;
       self.zakQ1ChatArea2 = true;
+      self.scrollFunc();
       setTimeout(function () {
         (self.zakChatText2 = true), (self.zakLoading2 = false);
         setTimeout(function () {
-          scrollBy({top: 300, behavior: 'smooth'});
           self.status = 8;
         }, self.sec);
       }, self.sec);

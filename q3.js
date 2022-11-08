@@ -1,6 +1,6 @@
 Vue.component('q3', {
   template: `
-  <div class="q3-contents ">
+  <div class="q3-contents">
     <div class="chatMessage-Advisor" v-show="zakQ1ChatArea1">
         <div class="person">
         </div>
@@ -104,6 +104,10 @@ Vue.component('q3', {
     changeZakReadq3: function (newVal3) {
       this.zakReadq3 = newVal3;
     },
+    scrollFunc: function () {
+      let app = document.querySelector('.q3-contents')
+      app.scrollIntoView();
+    },
     zakShowchatQ1: function () {
       let self = this;
       self.zakQ1ChatArea1 = true;
@@ -119,7 +123,6 @@ Vue.component('q3', {
     zakShowchatQ2: function () {
       let self = this;
       self.zakQ1ChatArea2 = true;
-      scrollBy({top: 200, behavior: 'smooth'});
       setTimeout(function () {
         (self.zakChatText2 = true), (self.zakLoading2 = false);
         setTimeout(function () {
@@ -134,7 +137,7 @@ Vue.component('q3', {
       setTimeout(function () {
         (self.zakChatText3 = true), (self.zakLoading3 = false);
         setTimeout(function () {
-          scrollBy({top: 100, behavior: 'smooth'});
+          self.scrollFunc();
           self.status = 3;
         }, self.sec);
       }, self.sec);

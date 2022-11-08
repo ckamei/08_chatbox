@@ -82,7 +82,7 @@ Vue.component('q2', {
         (self.zakChatText = true), (self.zakLoading1 = false);
         setTimeout(function () {
           self.status = 2;
-          scrollBy({top: 200, behavior: 'smooth'});
+          self.$emit('child-scroll');
         }, self.sec);
       }, self.sec);
     },

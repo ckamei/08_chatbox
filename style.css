@@ -2,11 +2,15 @@
   display: none;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 #app {
   max-width: 730px;
   margin: auto;
-  min-height: calc(100vh - -20px);
-  margin-bottom: 600px;
+  min-height: 100vh;
+  padding-bottom: 40vh;
 }
 
 h1 {
@@ -290,6 +294,10 @@ h1 {
 
 .Question-inner02 input{
 display: none;
+}
+
+.hiddenStatus {
+  display: none;
 }
 
 

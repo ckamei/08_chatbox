@@ -14,13 +14,13 @@ Vue.component('q1', {
               <div v-show="zakChatText"> 希望されるお風呂は、どのような形式ですか？</div>
           </div>
       </div>
-      <div class="chatMessage-Question chatMessage-Question02" v-if="status === 1">
-        <div for="btnBox" class="Question-inner02" v-on:click="question(index)" v-for="(product, index) in products" v-bind:key="product.id">
-            <input id="btnBox" type="radio" :value="product.id">
-            <img  class="QuestionText-title" v-bind:src="product.image">
-            <span class="QuestionText" v-html='product.text'></span>
-        </div>
+      <div class="chatMessage-Question chatMessage-Question02" v-if="status === 1" id="hiddenStatus">
+      <div for="btnBox" class="Question-inner02" v-on:click="question(index)" v-for="(product, index) in products" v-bind:key="product.id">
+          <input  id="btnBox" type="radio" :value="product.id">
+          <img  class="QuestionText-title img-note" v-bind:src="product.image">
+          <span class="QuestionText" v-html='product.text'></span>
       </div>
+    </div>
       <!---希望されるお風呂は、どのような形式ですか？ANSWER -->
       <div class="chatMessage-User" v-show="chatBox">
           <div class="person hidden">
@@ -38,7 +38,7 @@ Vue.component('q1', {
           </div>
       </div>
       <!-- 希望されるお風呂の大きさは、どのくらいですか？ -->
-      <q2 ref="child" @change="changeZakReadq1" :sec="sec"></q2>
+      <q2 ref="child" @change="changeZakReadq1" :sec="sec" ></q2>
   </div>
   `,
   props:['sec'],
@@ -59,9 +59,6 @@ Vue.component('q1', {
         { "id": 2, "text": "タイル貼り", "image": "images/tile.png","answer": "タイル貼りです"},
         { "id": 3, "text": "わからない", "image": "images/idk.png","answer": "わからないです"},
       ],
-      answer1: false,
-      answer2: false,
-      answer3: false,
     }
   },
   methods: {
@@ -69,20 +66,17 @@ Vue.component('q1', {
       this.zakReadq1 = newVal;
     },
     //チャット部分
-    zakShowChat06: function () {
-      return new Promise((resolve) => {
-        let self = this;
-        self.zakQ1ChatArea = true;
+    zakShowchatQ1: function () {
+      let self = this;
+      self.zakQ1ChatArea = true;
+      setTimeout(function () {
+        self.zakLoading1 = false,
+        self.zakChatText = true;
+        self.$emit('child-scroll');
         setTimeout(function () {
-          self.zakLoading1 = false,
-          self.zakChatText = true;
-          setTimeout(function () {
-            self.status = 1,
-            window.scrollTo({top: 0, behavior: 'smooth'});
+          self.status = 1;
           },self.sec)
-          resolve();
-        },self.sec)
-      });
+        }, self.sec)
     },
 
     //button押したら、チャットが表示する関数
@@ -90,8 +84,8 @@ Vue.component('q1', {
       let self = this;
       if (index === 0) {
         setTimeout(() => {
-          self.chatBox = true,
-            self.status = 0,
+          document.getElementById('hiddenStatus').classList.add("hiddenStatus");
+          self.chatBox = true;
             setTimeout(() => {
               self.zakLoading2 = false,
                 self.answer1 = true,
@@ -101,10 +95,10 @@ Vue.component('q1', {
             }, self.sec);
         },self.sec);
       }
-      else if (index === 1) {
+      if (index === 1) {
         setTimeout(() => {
-          self.chatBox = true,
-            self.status = 0,
+          document.getElementById('hiddenStatus').classList.add("hiddenStatus");
+          self.chatBox = true;
             setTimeout(() => {
               self.zakLoading2 = false,
                 self.answer2 = true,
@@ -114,10 +108,10 @@ Vue.component('q1', {
             }, self.sec);
         },self.sec);
       }
-      else if (index === 2) {
+      if (index === 2) {
         setTimeout(() => {
-          self.chatBox = true,
-            self.status = 0,
+          document.getElementById('hiddenStatus').classList.add("hiddenStatus");
+          self.chatBox = true;
             setTimeout(() => {
               self.zakLoading2 = false,
                 self.answer3 = true,

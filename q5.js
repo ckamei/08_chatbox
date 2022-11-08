@@ -73,21 +73,24 @@ Vue.component('q5', {
     changeZakReadq5: function (newVal5) {
       this.zakReadq5 = newVal5;
     },
+    scrollFunc: function () {
+      let app = document.querySelector('.q5-contents')
+      app.scrollIntoView();
+    },
     zakShowchat: function () {
       let self = this;
+      self.scrollFunc();
       self.zakQ1ChatArea = true;
       self.newZakReadq4 = true;
       setTimeout(function () {
         (self.zakChatText = true), (self.zakLoading1 = false);
         setTimeout(function () {
           self.status = 5;
-          scrollBy({top: 200, behavior: 'smooth'});
         }, self.sec);
       }, self.sec);
     },
     question: function (index) {
       let self = this;
-      
       if (index === 0) {
         setTimeout(() => {
           self.chatBox = true,
