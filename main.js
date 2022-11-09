@@ -45,10 +45,15 @@ let app = new Vue({
     visible01: false,
     visibleIcon02: false,
     visible02: false,
-    sec: 500,
+    sec: 300,
     isRead02: false,
+    products: []
   },
   created: async function () {
+    const res = await fetch('assets/data.json');
+    const items = await res.json();
+    this.products = items;
+
     await this.asyncFunc(this.showChat01());
     await this.asyncFunc(this.chatArea02);
     await this.asyncFunc(this.showChat02());
@@ -242,8 +247,6 @@ let app = new Vue({
       });
     },
 
-    
-
     //時差用の関数
     asyncFunc: function () {
       let self = this;
@@ -253,7 +256,5 @@ let app = new Vue({
         }, self.sec);
       });
     },
-
-    
   },
 });

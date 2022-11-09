@@ -1,0 +1,14 @@
+[
+  {
+    "id1":{ "btnId": 1, "question": "希望されるお風呂は、どのような形式ですか？", "text": "ユニットバス", "image": "images/unitbath.png", "answer": "ユニットバスです"},
+    "id2":{ "btnId": 2, "question": "希望されるお風呂は、どのような形式ですか？", "text": "タイル貼り", "image": "images/tile.png","answer": "タイル貼りです"},
+    "id3":{ "btnId": 3, "question": "希望されるお風呂は、どのような形式ですか？", "text": "わからない", "image": "images/idk.png","answer": "わからないです"}
+  },
+  {
+    "id1":{ "btnId": 1, "question": "希望されるお風呂の大きさは、どのくらいですか？", "text": "２畳未満", "image": "images/2jo.png","answer": "２畳未満です"},
+    "id2":{ "btnId": 2, "question": "希望されるお風呂の大きさは、どのくらいですか？", "text": "２畳以上", "image": "images/more2jo.png","answer": "２畳以上です"},
+    "id3":{ "btnId": 3, "question": "希望されるお風呂の大きさは、どのくらいですか？", "text": "わからない", "image": "images/idk.png","answer": "わからないです"}
+
+  }
+
+]
