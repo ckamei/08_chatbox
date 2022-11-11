@@ -1,8 +1,4 @@
-Vue.component('chatbox', {
-  components: {
-    "q1":q1,
-    "q2":q2,
-  },
+let chatbox = {
   template: `
     <div>
       <div class="q1-contents" v-for="product in products">
@@ -10,7 +6,7 @@ Vue.component('chatbox', {
               <div class="person">
               </div>
               <div class="chatText">
-                  <div class="loading" v-show="zakLoading1" >
+                  <div class="loading" v-show="zakLoading1">
                       <div class="load-item"></div>
                       <div class="load-item"></div>
                       <div class="load-item"></div>
@@ -58,38 +54,33 @@ Vue.component('chatbox', {
       selectIdx: null,
     }
   },
+  computed: {
+    loopQuestion: function () {
+      let newArray = [];
+      for (let i = 0; i < 2; i++){
+
+      }
+}
+  },
   methods: {
     changeZakReadq1: function (newVal) {
       this.zakReadq1 = newVal;
     },
 
-    loopChat: function () {
-      return this.products
-    },
     //チャット部分
     zakShowchatQ1: function () {
-      for (let i = 0; i < 2; i++) {
-        if (this.status === 1) {
-          //console.log(this.product.answer);
-        }
-      }
-
       let self = this;
       self.zakQ1ChatArea = true;
       setTimeout(function () {
         self.zakLoading1 = false,
         self.zakChatText = true;
         self.$emit('child-scroll');
-        setTimeout(function () {
-          self.status = 1;
-          },self.sec)
         }, self.sec)
     },
 
     //button押したら、チャットが表示する関数
     question: function (index) {
       let self = this;
-      
       if (self.selectIdx = index) {
         setTimeout(() => {
           document.getElementById('hiddenStatus').classList.add("hiddenStatus");
@@ -105,4 +96,4 @@ Vue.component('chatbox', {
       }
     },
   },
-})
+}

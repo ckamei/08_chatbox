@@ -1,5 +1,8 @@
 let app = new Vue({
   el: "#app",
+  components: {
+    'chatbox':chatbox
+  },
   data: {
     //最初の質問
     loading01: true,
@@ -47,17 +50,29 @@ let app = new Vue({
     visible02: false,
     sec: 300,
     isRead02: false,
-    products: []
+    products: [],
+    current: 0,
+    componentTypes: [],
   },
   created: async function () {
     const res = await fetch('assets/data.json');
     const items = await res.json();
     this.products = items;
-
+    
     await this.asyncFunc(this.showChat01());
     await this.asyncFunc(this.chatArea02);
     await this.asyncFunc(this.showChat02());
     await this.asyncFunc(this.showQuestion());
+  },
+  computed: {
+    component: function () {
+      let newArray = [];
+      for (let i = 0; i < 2; i++){
+        newArray.push(this.products[i])
+      }
+      console.log(newArray);
+      return this.componentTypes[this.current]
+    }
   },
   methods: {
     scrollFunc: function () {
@@ -138,7 +153,7 @@ let app = new Vue({
         setTimeout(function () {
           (self.loading05 = false), (self.chatText05 = true);
           setTimeout(function () {
-            self.$refs.child0.zakShowchatQ1();
+            self.$refs.child.zakShowchatQ1();
           }, self.sec);
         }, self.sec);
         resolve();
@@ -238,7 +253,7 @@ let app = new Vue({
             setTimeout(function () {
               (self.skrLoading09 = false), (self.isText09 = true);
               setTimeout(function () {
-                self.$refs.child0.zakShowchatQ1();
+                self.$refs.child.zakShowchatQ1();
               }, self.sec);
             }, self.sec);
           }, self.sec);
