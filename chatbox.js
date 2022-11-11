@@ -4,42 +4,44 @@ Vue.component('chatbox', {
     "q2":q2,
   },
   template: `
-    <div class="q1-contents">
-        <div class="chatMessage-Advisor" v-show="zakQ1ChatArea">
-            <div class="person">
-            </div>
-            <div class="chatText">
-                <div class="loading" v-show="zakLoading1" >
-                    <div class="load-item"></div>
-                    <div class="load-item"></div>
-                    <div class="load-item"></div>
-                </div>
-                <div v-show="zakChatText">{{ products[0].id1.question }}</div>
-            </div>
-        </div>
-        <div class="chatMessage-Question chatMessage-Question02" v-if="status === 1" id="hiddenStatus">
-          <div for="btnBox" class="Question-inner02" v-on:click="question(index)" v-for="(product, index) in products[0]" v-bind:key="product.btnId">
-              <input  id="btnBox" type="radio" :value="product.btnId">
-              <img  class="QuestionText-title img-note" v-bind:src="product.image">
-              <span class="QuestionText" v-html='product.text'></span>
+    <div>
+      <div class="q1-contents" v-for="product in products">
+          <div class="chatMessage-Advisor" v-show="zakQ1ChatArea">
+              <div class="person">
+              </div>
+              <div class="chatText">
+                  <div class="loading" v-show="zakLoading1" >
+                      <div class="load-item"></div>
+                      <div class="load-item"></div>
+                      <div class="load-item"></div>
+                  </div>
+                  <div v-show="zakChatText">{{ product.id1.question }}</div>
+              </div>
           </div>
-        </div>
-        <!---希望されるお風呂は、どのような形式ですか？ANSWER -->
-        <div class="chatMessage-User" v-show="chatBox">
-            <div class="person hidden">
+          <div class="chatMessage-Question chatMessage-Question02"  id="hiddenStatus">
+            <div for="btnBox" class="Question-inner02" v-on:click="question(index)" v-for="(queBtn, index) in product" v-bind:key="queBtn.btnId">
+                <input  id="btnBox" type="radio" :value="queBtn.btnId">
+                <img  class="QuestionText-title img-note" v-bind:src="queBtn.image">
+                <span class="QuestionText" v-html='queBtn.text'></span>
             </div>
-            <div class="chatText">
-                <div class="loading" v-show="zakLoading2">
-                    <div class="load-item"></div>
-                    <div class="load-item"></div>
-                    <div class="load-item"></div>
-                </div>
-                    <div v-if='answer1'>{{ products[0].answer }}</div>
-                    <div v-else-if='answer2'>{{ products[1].answer }}</div>
-                    <div v-else-if='answer3'>{{ products[2].answer }}</div>
-                <div class="chatText__already-read" v-show="zakReadq1">既読</div>
-            </div>
-        </div>
+          </div>
+          <!---希望されるお風呂は、どのような形式ですか？ANSWER -->
+          <div class="chatMessage-User" v-show="chatBox">
+              <div class="person hidden">
+              </div>
+              <div class="chatText">
+                  <div class="loading" v-show="zakLoading2">
+                      <div class="load-item"></div>
+                      <div class="load-item"></div>
+                      <div class="load-item"></div>
+                  </div>
+                      <div v-for="(queAns, index) in product">
+                        <div v-show='index === selectIdx'>{{ queAns.answer }}</div>
+                      </div>
+                  <div class="chatText__already-read" v-show="zakReadq1">既読</div>
+              </div>
+          </div>
+      </div>
     </div>
   `,
   props:['sec', 'products'],
@@ -50,20 +52,28 @@ Vue.component('chatbox', {
       zakLoading2: true,
       zakChatText: false,
       chatBox: false,
-      answer1: false,
-      answer2: false,
-      answer3: false,
-      status: 0,
+      answers: false,
+      status: 1,
       zakReadq1: false,
+      selectIdx: null,
     }
   },
   methods: {
     changeZakReadq1: function (newVal) {
       this.zakReadq1 = newVal;
     },
+
+    loopChat: function () {
+      return this.products
+    },
     //チャット部分
     zakShowchatQ1: function () {
-      console.log(this.products[0].id1.question);
+      for (let i = 0; i < 2; i++) {
+        if (this.status === 1) {
+          //console.log(this.product.answer);
+        }
+      }
+
       let self = this;
       self.zakQ1ChatArea = true;
       setTimeout(function () {
@@ -79,41 +89,16 @@ Vue.component('chatbox', {
     //button押したら、チャットが表示する関数
     question: function (index) {
       let self = this;
-      if (index === 0) {
+      
+      if (self.selectIdx = index) {
         setTimeout(() => {
           document.getElementById('hiddenStatus').classList.add("hiddenStatus");
           self.chatBox = true;
             setTimeout(() => {
               self.zakLoading2 = false,
-                self.answer1 = true,
+                self.answers = true,
                 setTimeout(() => {
-                  self.$refs.child.zakShowchatQ1();
-                }, self.sec);
-            }, self.sec);
-        },self.sec);
-      }
-      if (index === 1) {
-        setTimeout(() => {
-          document.getElementById('hiddenStatus').classList.add("hiddenStatus");
-          self.chatBox = true;
-            setTimeout(() => {
-              self.zakLoading2 = false,
-                self.answer2 = true,
-                setTimeout(() => {
-                  self.$refs.child.zakShowchatQ1();
-                }, self.sec);
-            }, self.sec);
-        },self.sec);
-      }
-      if (index === 2) {
-        setTimeout(() => {
-          document.getElementById('hiddenStatus').classList.add("hiddenStatus");
-          self.chatBox = true;
-            setTimeout(() => {
-              self.zakLoading2 = false,
-                self.answer3 = true,
-                setTimeout(() => {
-                  self.$refs.child.zakShowchatQ1();
+                  self.zakShowchatQ1();
                 }, self.sec);
             }, self.sec);
         },self.sec);
