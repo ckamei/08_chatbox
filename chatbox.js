@@ -1,7 +1,7 @@
 let chatbox = {
   template: `
     <div>
-      <div class="q1-contents" v-for="product in products">
+      <div class="q1-contents" v-for="product in component">
           <div class="chatMessage-Advisor" v-show="zakQ1ChatArea">
               <div class="person">
               </div>
@@ -14,7 +14,7 @@ let chatbox = {
                   <div v-show="zakChatText">{{ product.id1.question }}</div>
               </div>
           </div>
-          <div class="chatMessage-Question chatMessage-Question02"  id="hiddenStatus">
+          <div class="chatMessage-Question chatMessage-Question02"  id="hiddenStatus" v-if="status">
             <div for="btnBox" class="Question-inner02" v-on:click="question(index)" v-for="(queBtn, index) in product" v-bind:key="queBtn.btnId">
                 <input  id="btnBox" type="radio" :value="queBtn.btnId">
                 <img  class="QuestionText-title img-note" v-bind:src="queBtn.image">
@@ -40,7 +40,7 @@ let chatbox = {
       </div>
     </div>
   `,
-  props:['sec', 'products'],
+  props: ['sec', 'products'],
   data: function () {
     return {
       zakQ1ChatArea: false,
@@ -49,18 +49,18 @@ let chatbox = {
       zakChatText: false,
       chatBox: false,
       answers: false,
-      status: 1,
+      status: false,
       zakReadq1: false,
       selectIdx: null,
     }
   },
   computed: {
-    loopQuestion: function () {
-      let newArray = [];
-      for (let i = 0; i < 2; i++){
-
+    component: function (index) {
+      for (let item in this.products) {
       }
-}
+      console.log(this.products[0]);
+      return;
+    }
   },
   methods: {
     changeZakReadq1: function (newVal) {
@@ -73,9 +73,12 @@ let chatbox = {
       self.zakQ1ChatArea = true;
       setTimeout(function () {
         self.zakLoading1 = false,
-        self.zakChatText = true;
+          self.zakChatText = true;
         self.$emit('child-scroll');
+        setTimeout(() => {
+          self.status = true;
         }, self.sec)
+      }, self.sec)
     },
 
     //button押したら、チャットが表示する関数
@@ -85,14 +88,14 @@ let chatbox = {
         setTimeout(() => {
           document.getElementById('hiddenStatus').classList.add("hiddenStatus");
           self.chatBox = true;
-            setTimeout(() => {
-              self.zakLoading2 = false,
-                self.answers = true,
-                setTimeout(() => {
-                  self.zakShowchatQ1();
-                }, self.sec);
-            }, self.sec);
-        },self.sec);
+          setTimeout(() => {
+            self.zakLoading2 = false,
+              self.answers = true,
+              setTimeout(() => {
+                self.zakShowchatQ1();
+              }, self.sec);
+          }, self.sec);
+        }, self.sec);
       }
     },
   },

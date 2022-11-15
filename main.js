@@ -64,16 +64,6 @@ let app = new Vue({
     await this.asyncFunc(this.showChat02());
     await this.asyncFunc(this.showQuestion());
   },
-  computed: {
-    component: function () {
-      let newArray = [];
-      for (let i = 0; i < 2; i++){
-        newArray.push(this.products[i])
-      }
-      console.log(newArray);
-      return this.componentTypes[this.current]
-    }
-  },
   methods: {
     scrollFunc: function () {
       let app = document.querySelector('#app')
@@ -147,17 +137,14 @@ let app = new Vue({
     },
     //データをもとに、あなたの相場をざっくり計算します。
     showChat05: async function () {
-      return new Promise((resolve) => {
         let self = this;
-        self.chatArea05 = true;
+      self.chatArea05 = true;
+      setTimeout(() => {
+        (self.loading05 = false), (self.chatText05 = true);
         setTimeout(function () {
-          (self.loading05 = false), (self.chatText05 = true);
-          setTimeout(function () {
-            self.$refs.child.zakShowchatQ1();
-          }, self.sec);
+          self.$refs.child.zakShowchatQ1();
         }, self.sec);
-        resolve();
-      });
+      }, self.sec)
     },
 
 

@@ -153,10 +153,8 @@
                         </div>
                     </div>
                 </div>
-                <keep-alive>
-                    <chatbox :sec="sec" ref="child" :products="products" @child-scroll="scrollFunc" v-bind:is="component"></chatbox>
+                <chatbox :sec="sec" ref="child" :products="products" @child-scroll="scrollFunc"></chatbox>
                     <!-- <chatbox :sec="sec" :products="products" @child-scroll="scrollFunc" v-bind:is="component"></chatbox> -->
-                </keep-alive>
             </div>
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
         <script src="q10.js"></script>
